@@ -28,6 +28,42 @@ Obtenha informações detalhadas sobre um usuário específico.
         {
             "id": 2,
             "name": "Maria"
+        },
+        {
+            "id": 2,
+            "name": "Maria"
+        },
+        {
+            "id": 2,
+            "name": "Maria"
+        },
+        {
+            "id": 2,
+            "name": "Maria"
+        },
+        {
+            "id": 2,
+            "name": "Maria"
+        },
+        {
+            "id": 2,
+            "name": "Maria"
+        },
+        {
+            "id": 2,
+            "name": "Maria"
+        },
+        {
+            "id": 2,
+            "name": "Maria"
+        },
+        {
+            "id": 2,
+            "name": "Maria"
+        },
+        {
+            "id": 2,
+            "name": "Maria"
         }
     ]
 }
