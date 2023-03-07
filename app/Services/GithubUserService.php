@@ -19,7 +19,6 @@ class GithubUserService
         'asc', 
         'desc'
     ];
-    protected $request;
     protected $apiRequester;
     protected $baseUrl = 'https://api.github.com/';
 
