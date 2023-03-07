@@ -1,7 +1,8 @@
 
 # Sobre o projeto
 
-Projeto de API desenvolvido com o Laravel 9
+Projeto de API desenvolvido com o Laravel 9.
+
 Essa API comunica com a API do github e traz as informações detalhadas e ordenadas
 
 Caso queira, há um arquivo chamado `insomnia.json` na raiz do projeto e você poderá importar as requisições no insomnia.
