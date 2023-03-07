@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\GithubUserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,4 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('users')->group(function () {
     Route::get('/{userName}', [GithubUserController::class, 'userData']);
     Route::get('/{userName}/details', [GithubUserController::class, 'userDataDetails']);
+    Route::get('/{userName}/repos', [GithubUserController::class, 'userReposData']);
+    Route::get('/{userName}/repos/{repository}/details', [GithubUserController::class, 'userReposDataDetails']);
 });

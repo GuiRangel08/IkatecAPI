@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 use App\Services\GithubUserService;
 
 class GithubUserController extends Controller
@@ -21,6 +23,25 @@ class GithubUserController extends Controller
 
     public function userDataDetails($userName) 
     {
-        return $this->githubUserService->userDataDetails($userName);
+        $userData = $this->userData($userName);
+
+        return $this->githubUserService->userDataDetails($userData);
+    }
+
+    public function userReposData(Request $request, $userName)
+    {
+        $sort = $request->input('sort');
+        $direction = $request->input('direction');
+
+        $headers = $this->githubUserService->getHeaders($request->header());
+
+        return $this->githubUserService->userReposData($userName, $sort, $direction, $headers);
+    }
+
+    public function userReposDataDetails(Request $request, $userName, $repository) 
+    {
+        $headers = $this->githubUserService->getHeaders($request->header());
+
+        return $this->githubUserService->userReposDataDetails($userName, $repository, $headers);
     }
 }
