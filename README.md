@@ -18,7 +18,7 @@ Obtenha informações detalhadas sobre um usuário específico.
 - **Conteúdo**:
 <div style="overflow: auto; height: 200px;">
 
-```json
+`
 {
     "data": [
         {
@@ -67,5 +67,5 @@ Obtenha informações detalhadas sobre um usuário específico.
         }
     ]
 }
-```
+`
 </div>
