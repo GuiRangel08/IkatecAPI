@@ -7,7 +7,6 @@ Essa API comunica com a API do github e traz as informações detalhadas e orden
 Caso queira, há um arquivo chamado `insomnia.json` na raiz do projeto e você poderá importar as requisições no insomnia.
 
 OBS: Apesar do Token de autenticação ser opcional no Headers, recomendamos a utilização que o mesmo seja enviado, pois o github limita o número de requisições caso não esteja autenticado.
-
 ## Gerar o Token de autenticação
 
 ```
@@ -20,7 +19,21 @@ OBS: Apesar do Token de autenticação ser opcional no Headers, recomendamos a u
 7. Clique em "Generate token" (Gerar token).
 8. Copie o token gerado e armazene-o em um local seguro. Não compartilhe este token com ninguém.
 ```
-___
+
+## Executando o projeto
+
+É necessário que tenha o Docker v23 instalado na máquina
+
+Para executar o projeto execute o comando:
+```bash
+docker compose up -d
+```
+
+Após execução, a api estará disponível através do host
+```bash
+localhost:81
+```
+
 # Documentação da API
 ## Buscar usuário
 
