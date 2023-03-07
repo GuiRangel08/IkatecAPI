@@ -16,9 +16,7 @@ Obtenha informações detalhadas sobre um usuário específico.
 **Resposta de sucesso**:
 - **Código**: `200`
 - **Conteúdo**:
-<div style="overflow: auto; height: 200px;">
-
-`
+<div style="overflow-y: auto; height: 200px;">
 {
     "data": [
         {
@@ -67,5 +65,4 @@ Obtenha informações detalhadas sobre um usuário específico.
         }
     ]
 }
-`
 </div>
