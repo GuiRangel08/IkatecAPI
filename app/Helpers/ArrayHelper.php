@@ -5,7 +5,7 @@ namespace App\Helpers;
 class ArrayHelper
 {
     public static function compareStrings($a, $b, $key) {
-        if ($a[$key] < $b[$key]) {
+        if (strtolower($a[$key]) < strtolower($b[$key])) {
             return -1;
         } elseif ($a[$key] > $b[$key]) {
             return 1;

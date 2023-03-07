@@ -17,7 +17,6 @@ class GithubUserController extends Controller
 
     public function userData(Request $request, $userName) 
     {
-
         $headers = $this->githubUserService->getHeaders($request->header());
 
         return $this->githubUserService->userData($userName, $headers);
@@ -28,7 +27,11 @@ class GithubUserController extends Controller
         $headers = $this->githubUserService->getHeaders($request->header());
 
         $userData = $this->userData($request, $userName);
-        
+
+        if (isset($userData['error'])) {
+            return $userData;
+        }
+
         $userReposData = $this->userReposData($request, $userName);
 
         $preparedUserReposData = $this->githubUserService->prepareJsonReposData($userReposData, $headers);

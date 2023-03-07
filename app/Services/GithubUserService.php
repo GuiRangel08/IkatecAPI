@@ -29,9 +29,16 @@ class GithubUserService
 
     public function userData($userName, $headers) 
     {
-            $userData = $this->apiRequester->makeRequest("users/$userName", 'GET', $headers);
+        $userData = $this->apiRequester->makeRequest("users/$userName", 'GET', $headers);
 
-            return $userData;
+        if (isset($userData['message'])) {
+            return [
+                'error' => true,
+                'message' => 'Erro ao encontrar o usuário no github, verifique se os parâmetros estão corretos'
+            ];
+        }        
+
+        return $userData;
     }
 
     public function userDataDetails($userData, $headers)
@@ -49,53 +56,52 @@ class GithubUserService
 
     public function userReposData($userName, $sort = 'star', $direction = 'desc', $headers = null)
     {
-        try {
-            $userReposData = $this->apiRequester->makeRequest("users/$userName/repos", 'GET', $headers);
-            $userReposData = json_decode($userReposData, true);
+        $userReposData = $this->apiRequester->makeRequest("users/$userName/repos", 'GET', $headers);
 
-            if (
-                !in_array($sort, $this->validSorts) 
-                || $sort === 'star'
-                ) {
-                    $sort = 'stargazers_count';
-                }
+        if (isset($userReposData['message'])) {
+            return [
+                'error' => true,
+                'message' => 'Erro ao encontrar o repositório no github, verifique se os parâmetros estão corretos'
+            ];
+        }      
 
-                if (!in_array($direction, $this->validDirections)) {
-                    $direction = 'desc';
-                }
+        $userReposData = json_decode($userReposData, true);
 
-                $sortedUserReposData = $this->sortUserRepos($userReposData, $sort, $direction);
-                return json_encode($sortedUserReposData, JSON_UNESCAPED_SLASHES);
-        } catch (\Exception $e) {
-            return response()
-                ->json([
-                    'success' => false,
-                    'message' => 'Ocorreu um erro na requisição: ' . $e->getMessage()
-                ])
-                ->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
+        if (
+            !in_array($sort, $this->validSorts) 
+            || $sort === 'star'
+            ) {
+                $sort = 'stargazers_count';
+            }
+
+            if (!in_array($direction, $this->validDirections)) {
+                $direction = 'desc';
+            }
+
+            $sortedUserReposData = $this->sortUserRepos($userReposData, $sort, $direction);
+            return json_encode($sortedUserReposData, JSON_UNESCAPED_SLASHES);
     }
 
     public function userReposDataDetails($userName, $repository, $headers = null)
     {
-        try {
-            $userReposData = $this->apiRequester->makeRequest("repos/$userName/$repository", 'GET', $headers);
+        $userReposData = $this->apiRequester->makeRequest("repos/$userName/$repository", 'GET', $headers);
 
-            $userReposDataDetails = [
-                "name" => $userReposData['name'],
-                "description" => $userReposData['description'],
-                "stargazers_count" => $userReposData['stargazers_count'],
-                "language" => $userReposData['language'],
-                "repository_url" => $userReposData['html_url']
+        if (isset($userReposData['message'])) {
+            return [
+                'error' => true,
+                'message' => 'Erro ao encontrar o repositório no github, verifique se os parâmetros estão corretos'
             ];
+        }    
 
-            return json_encode($userReposDataDetails, JSON_UNESCAPED_SLASHES);
-        } catch (\Exception $e) {
-            return json_encode([
-                'success' => 'false',
-                'message' => 'Ocorreu um erro na requisição: ' . $e->getMessage()
-            ]); 
-        }
+        $userReposDataDetails = [
+            "name" => $userReposData['name'],
+            "description" => $userReposData['description'],
+            "stargazers_count" => $userReposData['stargazers_count'],
+            "language" => $userReposData['language'],
+            "repository_url" => $userReposData['html_url']
+        ];
+
+        return json_encode($userReposDataDetails, JSON_UNESCAPED_SLASHES);
     }
 
     private function sortUserRepos($data, $key, $direction) 
