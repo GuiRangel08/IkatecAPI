@@ -37,9 +37,9 @@ localhost:81
 # Documentação da API
 ## Buscar usuário
 
-### `GET`
+### GET
 
-### `/api/users/`:userName
+### /api/users/`:userName`
 ### __Header__
 
 | Campo             | Tipo | Descrição |
@@ -109,9 +109,9 @@ curl --request GET \
 ```
 # Buscar detalhes do usuário
 
-## `GET`
+## GET
 
-## `/api/users/`:userName`/details`
+## /api/users/`:userName`/details
 ### __Header__
 
 | Campo             | Tipo | Descrição |
@@ -192,9 +192,9 @@ curl --request GET \
 ```
 # Buscar repositório (todos os dados)
 
-## `GET`
+## GET
 
-## `/api/users/`:userName`/repos`
+## /api/users/`:userName`/repos
 ### __Header__
 
 | Campo             | Tipo | Descrição |
@@ -334,9 +334,9 @@ curl --request GET \
 ```
 # Buscar detalhes do repositório
 
-## `GET`
+## GET
 
-## `/api/users/`:userName`/repos/`:repository`/details`
+## /api/users/`:userName`/repos/`:repository`/details
 ### __Header__
 
 | Campo             | Tipo | Descrição |
