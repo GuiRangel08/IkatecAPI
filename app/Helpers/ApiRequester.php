@@ -22,8 +22,6 @@ class ApiRequester {
                 $http = $http->withBody($body)->getBody();
             }
             return $http->$method($url);
-            // $response = Http::withHeaders($headers)->$method($url, $body);
-            // return $response->body();
         } catch (Exception $e) {
             throw new Exception('Ocorreu um erro na requisição: ' . $e->getMessage());
         }

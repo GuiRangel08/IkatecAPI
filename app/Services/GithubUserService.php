@@ -51,20 +51,20 @@ class GithubUserService
     {
         try {
             $userReposData = $this->apiRequester->makeRequest("users/$userName/repos", 'GET', $headers);
-            
+
             $userReposData = json_decode($userReposData, true);
-            
+
             if (
                 !in_array($sort, $this->validSorts) 
                 || $sort === 'star'
                 ) {
                     $sort = 'stargazers_count';
                 }
-                
+
                 if (!in_array($direction, $this->validDirections)) {
                     $direction = 'desc';
                 }
-                
+
                 $sortedUserReposData = $this->sortUserRepos($userReposData, $sort, $direction);
                 return json_encode($sortedUserReposData, JSON_UNESCAPED_SLASHES);
         } catch (\Exception $e) {
