@@ -27,14 +27,14 @@ class GithubUserService
         $this->apiRequester = new ApiRequester($this->baseUrl);   
     }
 
-    public function userData($userName) 
+    public function userData($userName, $headers) 
     {
-            $userData = $this->apiRequester->makeRequest("/users/$userName", 'GET');
+            $userData = $this->apiRequester->makeRequest("users/$userName", 'GET', $headers);
 
             return $userData;
     }
 
-    public function userDataDetails($userData)
+    public function userDataDetails($userData, $headers)
     {
         $userDataDetails = [
             "followers" => $userData['followers'],
@@ -51,7 +51,6 @@ class GithubUserService
     {
         try {
             $userReposData = $this->apiRequester->makeRequest("users/$userName/repos", 'GET', $headers);
-
             $userReposData = json_decode($userReposData, true);
 
             if (
@@ -99,7 +98,8 @@ class GithubUserService
         }
     }
 
-    private function sortUserRepos($data, $key, $direction) {
+    private function sortUserRepos($data, $key, $direction) 
+    {
         usort($data, function($a, $b) use ($key, $direction) {
             $result = ($direction == 'asc') ? 1 : -1;
 
@@ -118,10 +118,38 @@ class GithubUserService
         return $data;
     }
 
-    public function getHeaders($headers) {
-        if (isset($headers['Authorization'])) {
+    public function mergeUserDataAndRepositories($userData, $userReposData) 
+    {
+        $userData = json_decode($userData, true);
+        $userReposData = json_decode($userReposData, true);
+
+        $userData['repositories'] = $userReposData;
+
+        return json_encode($userData, JSON_UNESCAPED_SLASHES);
+    }
+
+    public function prepareJsonReposData($jsonReposData)
+    {
+        $reposData = json_decode($jsonReposData, true);
+        
+        foreach ($reposData as $repos) {
+            $preparedReposData[] = [
+                "name" => $repos['name'],
+                "description" => $repos['description'],
+                "stargazers_count" => $repos['stargazers_count'],
+                "language" => $repos['language'],
+                "repository_url" => $repos['html_url']
+            ];
+        }
+
+        return json_encode($preparedReposData);
+    }
+
+    public function getHeaders($headers) 
+    {
+        if (isset($headers['authorization'])) {
             $headers = [
-                'Authorization' => $headers('Authorization')
+                'authorization' => $headers['authorization']
             ];
             return $headers;
         }
