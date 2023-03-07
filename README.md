@@ -53,7 +53,7 @@ localhost:81
 | 200 | OK  |
 ```bash
 curl --request GET \
-  --url http://localhost:81/api/users/guirangel08
+  --url 'http://localhost:81/api/users/guirangel08'
 ```
 
 ### __Resposta Sucesso__ 
@@ -357,7 +357,7 @@ curl --request GET \
 
 ```bash
 curl --request GET \
-  --url http://localhost:81/api/users/GuiRangel08/repos/contato_seguro_api/details
+  --url 'http://localhost:81/api/users/GuiRangel08/repos/contato_seguro_api/details'
 ```
 
 ### __Resposta Sucesso__ 
