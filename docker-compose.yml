@@ -5,6 +5,6 @@ services:
     build: .
     container_name: php-api
     ports:
-      - "8001:80"
+      - "81:80"
     volumes:
       - .:/var/www/html
