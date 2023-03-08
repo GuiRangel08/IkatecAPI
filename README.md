@@ -21,9 +21,30 @@ OBS: Apesar do Token de autenticação ser opcional no Headers, recomendamos a u
 8. Copie o token gerado e armazene-o em um local seguro. Não compartilhe este token com ninguém.
 ```
 
-## Executando o projeto
+## Executando o projeto 
 
-É necessário que tenha o Docker v23 instalado na máquina
+>__Requisitos__
+>- php ^8.1
+>- composer
+
+execute o comando:
+
+```bash
+composer install && composer dump-autoload
+```
+
+Para executar o projeto digite:
+```bash
+php artisan serve
+```
+
+Após execução, a api estará disponível através do host
+```bash
+localhost:8000
+```
+## Executando o projeto com o Docker
+>__Requisitos__
+> - Docker v23
 
 Para executar o projeto execute o comando:
 ```bash
