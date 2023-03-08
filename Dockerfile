@@ -1,23 +1,17 @@
-FROM php:8.2.3-apache
-
-RUN apt-get update && apt-get install -y \
-    libzip-dev \
-    && docker-php-ext-install zip
+FROM php:8.1-apache
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-COPY . /var/www/html/
-
-WORKDIR /var/www/html
-
-RUN chown -R www-data:www-data /var/www/html/
-
-RUN chown -R www-data:www-data storage bootstrap/cache
-
-RUN chmod -R 755 /var/www/html/
+RUN docker-php-ext-install pdo_mysql
 
 RUN a2enmod rewrite
 
-RUN sed -i 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/000-default.conf
+WORKDIR /var/www/html
 
-EXPOSE 80
+COPY . .
+
+RUN composer install && composer dump-autoload
+
+RUN chown -R www-data:www-data storage bootstrap/cache
+
+COPY .docker/vhost.conf /etc/apache2/sites-available/000-default.conf

@@ -1,14 +1,10 @@
-version: "3.9"
+version: '3.9'
 
 services:
-  php:
-    build:
-      context: .
-      dockerfile: Dockerfile-php
-    container_name: php
-    command: ./script.sh
+  php-api:
+    build: .
+    container_name: php-api
+    ports:
+      - "8001:80"
     volumes:
       - .:/var/www/html
-    ports:
-      - "81:8000"
-  

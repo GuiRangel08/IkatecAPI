@@ -1,8 +1,0 @@
-# Dockerfile-apache
-FROM httpd:2.4
-
-# Copiar o arquivo de configuração do apache para o contêiner
-COPY ./httpd.conf /usr/local/apache2/conf/httpd.conf
-
-# Expor a porta 80 do contêiner
-EXPOSE 80
