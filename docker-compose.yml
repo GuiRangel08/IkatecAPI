@@ -1,13 +1,14 @@
-version: '3.9'
-services: 
+version: "3.9"
 
-  laravel-api:
+services:
+  php:
     build:
       context: .
-      dockerfile: Dockerfile
-    container_name: api
-    ports:
-      - 81:80
-    restart: always
+      dockerfile: Dockerfile-php
+    container_name: php
+    command: ./script.sh
     volumes:
-      - .:/var/www/html/
+      - .:/var/www/html
+    ports:
+      - "81:8000"
+  
