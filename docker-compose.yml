@@ -1,9 +1,9 @@
 version: '3.9'
 
 services:
-  php-api:
+  php-apiv2:
     build: .
-    container_name: php-api
+    container_name: php-apiv2
     ports:
       - "81:80"
     volumes:
