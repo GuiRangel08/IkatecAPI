@@ -10,6 +10,8 @@ WORKDIR /var/www/html
 
 COPY . .
 
+ENV APACHE_LOG_DIR /var/log/apache2
+
 RUN composer install && composer dump-autoload
 
 RUN chown -R www-data:www-data storage bootstrap/cache
