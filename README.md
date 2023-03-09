@@ -23,6 +23,10 @@ OBS: Apesar do Token de autenticação ser opcional no Headers, recomendamos a u
 
 ## Executando o projeto 
 
+Existem duas maneiras executar o projeto. 
+
+### 1. Sem o Docker
+
 >__Requisitos__
 >- php ^8.1
 >- composer
@@ -42,7 +46,8 @@ Após execução, a api estará disponível através do host
 ```bash
 localhost:8000
 ```
-## Executando o projeto com o Docker
+### 2. Com o Docker
+
 >__Requisitos__
 > - Docker v23
 
